@@ -1,0 +1,40 @@
+﻿@model List<PersonelDto>
+@using PersonnelTrackingSystem.Entities.DTOs
+
+
+
+<h2>Personel Listesi</h2>
+
+<p>
+    @Html.ActionLink("Yeni Personel Ekle", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Doğum Tarihi</th>
+        <th>Şehir</th>
+        <th>Adres</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Ad</td>
+            <td>@item.Soyad</td>
+            <td>@item.DogumTarihi.ToShortDateString()</td>
+            <td>@item.Sehir</td>
+            <td>@item.Adres</td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new
+                {
+                    @class = "btn btn-danger btn-sm",
+                    onclick = "return confirm('Silmek istediğine emin misin?');"
+                })
+            </td>
+        </tr>
+    }
+</table>
